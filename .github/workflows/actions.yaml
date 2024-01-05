@@ -19,6 +19,9 @@ jobs:
       HEADLESS_CHROME: true
 
     steps:
+      # save start time to github environement variable to calculate run duration later
+      - name: Save start time to envrionment variable
+        run: echo "START_TIME=$(date +%s)" >> $GITHUB_ENV
       - uses: actions/checkout@v2
       # install java
       - uses: actions/setup-java@v2
@@ -29,4 +32,7 @@ jobs:
       - name: Run tests with maven
         working-directory: webdriver_java
         run: mvn test
-      # handle remote server chromedriver
+      # Calculate total duration
+      - name: Calculate execution time
+        if: always()
+        run: expr $(date +%s) - ${START_TIME}
