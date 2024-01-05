@@ -39,4 +39,4 @@ jobs:
         #Calculate execution time and extract number of passed/failed ignored tests from results xml
         run: |
           echo "TOTAL_DURATION=$(expr $(date +%s) - ${START_TIME})"
-          .resources/test_result_script.sh
+          ./resources/test_result_script.sh
